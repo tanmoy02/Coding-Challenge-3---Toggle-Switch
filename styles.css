@@ -1,0 +1,66 @@
+:root {
+  --on: #6948ed;
+  --off: #555;
+  --toggle-width: 80px;
+  --toggle-height: 30px;
+  --transition-time: 150ms;
+}
+body {
+  background: #333;
+}
+
+/* solution styles */
+
+.toggle {
+  display: grid;
+  height: 100%;
+  justify-items: center;
+  align-content: center;
+}
+
+input[type="checkbox"] {
+  position: absolute;
+  top: 50%;
+  translate: -50% -50%;
+  left: 50%;
+  width: var(--toggle-width);
+  height: var(--toggle-height);
+  margin: 0;
+  opacity: 0;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.switch {
+  width: var(--toggle-width);
+  height: var(--toggle-height);
+  background: var(--off);
+  border-radius: 20px;
+  pointer-events: none;
+  position: relative;
+  transition: background var(--transition-time);
+  will-change: background;
+}
+
+.switch::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: calc(var(--toggle-height) - 10px);
+  height: calc(var(--toggle-height) - 10px);
+  background: #fff;
+  border-radius: 20px;
+  translate: 5px -50%;
+  pointer-events: none;
+  transition: translate var(--transition-time);
+  will-change: translate;
+}
+
+input[type="checkbox"]:checked + .switch {
+  background: var(--on);
+}
+
+input[type="checkbox"]:checked+.switch::after {
+  translate: calc(var(--toggle-width) - 25px) -50%;
+}
